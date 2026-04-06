@@ -237,13 +237,7 @@ function buildLevel(){
     px += pw + rnd(75,150+lvl*15);
   }
 
-  // Huecos — nunca cerca del spawn (mínimo X=550)
-  let gx=550;
-  for(let i=0;i<2+lvl*2;i++){
-    const gw=48+lvl*9+rnd(0,18);
-    if(gx<levelWidth-500) gaps.push({x:Math.floor(gx), w:Math.ceil(gw)});
-    gx+=rnd(220,400);
-  }
+  // Sin huecos en el suelo
 
   // Pinchos
   if(lvl>=3){
@@ -315,10 +309,7 @@ function resolveVertical(){
     // Superposición horizontal (con margen de 4px en cada lado)
     if(bird.x + bird.w - 4 <= p.x || bird.x + 4 >= p.x + p.w) continue;
 
-    // Para el suelo, ignorar si el CENTRO del pájaro está sobre un gap
-    if(p.type==='ground'){
-      if(inGap(bird.x + bird.w * 0.5)) continue;
-    }
+    // Para el suelo, siempre colisionar (sin huecos)
 
     const bBottom = bird.y + bird.h;
 
@@ -609,14 +600,7 @@ function draw(){
   ctx.save();
   ctx.translate(-Math.round(camX), 0);
 
-  // Oscuridad en huecos
-  for(const g of gaps){
-    const dg=ctx.createLinearGradient(g.x,gY,g.x,H);
-    dg.addColorStop(0,'rgba(0,0,0,0.28)');
-    dg.addColorStop(1,'rgba(0,0,0,0.85)');
-    ctx.fillStyle=dg;
-    ctx.fillRect(g.x,gY,g.w,H-gY);
-  }
+  // (sin huecos)
 
   // Plataformas
   for(const p of platforms){
@@ -629,7 +613,6 @@ function draw(){
     if(p.type==='ground'){
       ctx.fillRect(p.x,p.y,p.w,8);
       for(let i=0;i<p.w;i+=9){
-        if(inGap(p.x+i)) continue;
         ctx.beginPath();
         ctx.moveTo(p.x+i,p.y); ctx.lineTo(p.x+i+4,p.y-8); ctx.lineTo(p.x+i+8,p.y);
         ctx.fill();
