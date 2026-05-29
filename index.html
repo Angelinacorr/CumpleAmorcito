@@ -50,42 +50,7 @@
     font-family: 'Cormorant Garamond', serif;
   }
 
-  /* ─── ROTATE OVERLAY ─── */
-  #rotate-overlay {
-    display: none;
-    position: fixed; inset: 0; z-index: 9999;
-    background: var(--black);
-    flex-direction: column;
-    align-items: center; justify-content: center;
-    gap: 20px;
-    color: var(--blush);
-    text-align: center;
-    padding: 40px;
-  }
-  #rotate-overlay.show { display: flex; }
-  .rotate-icon { font-size: 60px; animation: spin 2s linear infinite; }
-  @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-  #rotate-overlay p { font-family: 'Great Vibes', cursive; font-size: 2rem; }
 
-  @media (orientation: portrait) and (max-width: 900px) {
-  #rotate-overlay {
-    display: flex;
-  }
-
-  @media (orientation: landscape) {
-  #rotate-overlay {
-    display: none !important;
-  }
-
-  .page {
-    position: absolute;
-  }
-}
-
-  .page {
-    display: none !important;
-  }
-}
 
   /* ─── PARTICLES ─── */
   #particles-canvas {
@@ -1704,19 +1669,7 @@ Gracias por hacer mis días más bonitos y por ser alguien tan especial para mí
 let currentPage = 'cover';
 let musicStarted = false;
 
-// ─── ORIENTATION CHECK ───────────────────
-function checkOrientation() {
-  const isMobile = /Android|iPhone|iPad|iPod|Mobi/i.test(navigator.userAgent) || window.innerWidth < 768;
-  const overlay = document.getElementById('rotate-overlay');
-  if (isMobile && window.innerHeight > window.innerWidth) {
-    overlay.classList.add('show');
-  } else {
-    overlay.classList.remove('show');
-  }
-}
-window.addEventListener('orientationchange', () => setTimeout(checkOrientation, 300));
-window.addEventListener('resize', checkOrientation);
-checkOrientation();
+
 
 // ─── LEFT IMAGE UPLOAD ───────────────────
 function loadLeftImage(event) {
