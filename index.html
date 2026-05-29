@@ -50,8 +50,13 @@
     font-family: 'Cormorant Garamond', serif;
   }
 
+html {
+  scroll-behavior: smooth;
+}
 
-
+body {
+  -webkit-overflow-scrolling: touch;
+}
   /* ─── PARTICLES ─── */
   #particles-canvas {
     position: fixed; inset: 0; z-index: 0;
@@ -60,10 +65,19 @@
 
   /* ─── PAGES ─── */
   .page {
-    position: fixed; inset: 0; z-index: 10;
-    display: flex; align-items: center; justify-content: center;
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.8s ease;
+
+    position: relative;
+  width: 100%;
+  min-height: 100dvh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+
   }
   .page.active { opacity: 1; pointer-events: all; }
 
@@ -374,6 +388,7 @@
     text-align: center;
     box-shadow: 0 20px 60px rgba(192,57,90,0.2);
     position: relative;
+    overflow-wrap: break-word;
   }
   .content-card::before {
     content: '💕';
