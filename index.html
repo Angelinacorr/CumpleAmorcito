@@ -41,8 +41,11 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   html, body {
-    width: 100%; height: 100%;
-    overflow: hidden;
+    width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-text-size-adjust: 100%;
     background: var(--black);
     font-family: 'Cormorant Garamond', serif;
   }
@@ -63,6 +66,26 @@
   .rotate-icon { font-size: 60px; animation: spin 2s linear infinite; }
   @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
   #rotate-overlay p { font-family: 'Great Vibes', cursive; font-size: 2rem; }
+
+  @media (orientation: portrait) and (max-width: 900px) {
+  #rotate-overlay {
+    display: flex;
+  }
+
+  @media (orientation: landscape) {
+  #rotate-overlay {
+    display: none !important;
+  }
+
+  .page {
+    position: absolute;
+  }
+}
+
+  .page {
+    display: none !important;
+  }
+}
 
   /* ─── PARTICLES ─── */
   #particles-canvas {
@@ -85,7 +108,7 @@
   }
 
   .cover-layout {
-    width: 100vw; height: 100vh;
+    width: 100vw; min-height: 100dvh;
     display: grid;
     grid-template-columns: 38% 62%;
     position: relative;
@@ -298,7 +321,7 @@
   }
 
   .boxes-layout {
-    width: 100vw; height: 100vh;
+    width: 100vw; min-height: 100dvh;
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
     gap: 20px;
@@ -354,7 +377,8 @@
 
 .content-layout {
   width: 100%;
-  min-height: 100vh;
+  min-height: 100dvh;
+  height: auto;
 
   display: flex;
   justify-content: center;
@@ -373,7 +397,7 @@
 
 #page-content-3 .content-card {
   margin: auto;
-  max-width: 50%;
+  width: min(90%, 700px);
 }
   .content-card {
     background: rgba(255,255,255,0.95);
