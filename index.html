@@ -57,12 +57,6 @@ html {
 body {
   -webkit-overflow-scrolling: touch;
 }
-
-body{
-  position:relative;
-  overflow-x:hidden;
-  overflow-y:auto;
-}
   /* ─── PARTICLES ─── */
   #particles-canvas {
     position: fixed; inset: 0; z-index: 0;
@@ -70,25 +64,13 @@ body{
   }
 
   /* ─── PAGES ─── */
- .page{
-  position:absolute;
-  inset:0;
-
-  width:100%;
-  min-height:100dvh;
-
-  opacity:0;
-  pointer-events:none;
-
-  transition:opacity .8s ease;
-}
-  .page.active { opacity:1;
-  pointer-events:auto;
-  z-index:10; }
-
-  .page:not(.active){
-  display:none;
-}
+  .page {
+    position: fixed; inset: 0; z-index: 10;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.8s ease;
+  }
+  .page.active { opacity: 1; pointer-events: all; }
 
   /* ─── PAGE 1: COVER ─── */
   #page-cover {
@@ -364,21 +346,20 @@ body{
   }
 
 .content-layout {
-  align-items:flex-start;
-  justify-content:center;
-
   width: 100%;
   min-height: 100dvh;
   height: auto;
 
   display: flex;
+  justify-content: center;
+  align-items: center;
 
   padding: 30px;
   position: relative;
 }
 
 #page-content-3 .content-layout {
-  min-height:100dvh;
+  height: 70vh;
   overflow-y: auto;
   align-items: flex-start; /* evita que se corte arriba */
   padding-top: 20px;
@@ -398,7 +379,6 @@ body{
     text-align: center;
     box-shadow: 0 20px 60px rgba(192,57,90,0.2);
     position: relative;
-    overflow-wrap: break-word;
   }
   .content-card::before {
     content: '💕';
